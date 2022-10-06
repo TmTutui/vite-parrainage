@@ -15,15 +15,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
@@ -32,39 +23,109 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.container {
+  height: 100%;
+  width: 100%;
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-button {
+.off {
+    color: rgba(0, 0, 0, 0.0) !important;
+    background: rgba(230, 230, 250, 0.0) !important;
+    -webkit-transition: all 2s; /* Safari */
+    transition: all 2s;
+}
+
+.cards {
+    -webkit-perspective: 900px;
+    -moz-perspective: 900px;
+    perspective: 900px;
+    
+    width: 100px;
+    height: 150px;
+
+    -webkit-transition: all 1s; /* Safari */
+    transition: all 1s;
+}
+
+.cards .card.flipped {
+    -webkit-transform: rotatex(-180deg);
+    -moz-transform: rotatex(-180deg);
+    transform: rotatex(-180deg);
+    height: 100%;
+    z-index: 100;
+}
+
+.cards .card {
+    width: 100%;
+    height: 100%;
+
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 1s; /* Safari */
+    transition: all 1s;
+}
+
+.cards .card .face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    
+    border-radius: 8px;
+
+    -webkit-backface-visibility: hidden ;
+    -moz-backface-visibility: hidden ;
+    backface-visibility: hidden ;
+    z-index: 2;
+    font-size: 2em;
+    font-family: arial, sans-serif;
+    text-align: center;
+    -webkit-transition: all 0.5s; /* Safari */
+    transition: all 0.5s;
+}
+
+.cards .card .front {
+    position: absolute;
+    background: tomato;
+    z-index: 1;
+}
+
+/* .cards .card .back {
+    -webkit-transform: rotatex(-180deg);
+    -moz-transform: rotatex(-180deg);
+    transform: rotatex(-180deg);
+    background: gold;
+} */
+
+.cards .card .front, .cards .card .back{
+    cursor: pointer;
+}
+
+.big {
+    position: fixed;
+    left: 0px;
+
+    background-color:rgba(255, 255, 255, 1);
+    height:100%;
+    width:100%;
+    
+    top: 0% !important;
+    margin-left: 0%;
+    margin-right: 0%;
+    z-index:100;
+}
+
+.selected {
+  filter: grayscale(100%);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [ page, setPage ] = useState('landing')
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+  const [ flipped, setFlipped ] = useState('')
+
+  const [ people, setPeople ] = useState({
+    'Tulio':   { hidden_img: '/assets/test1.jpeg', normal_img: '/assets/test2.jpeg', already_selected: false},
+    'Machado': { hidden_img: '/assets/test1.jpeg', normal_img: '/assets/test2.jpeg', already_selected: false},
+    'Enzo':    { hidden_img: '/assets/test2.jpeg', normal_img: '/assets/test1.jpeg', already_selected: false},
+  })
+
+  const clickCard = (name) => {
+    if(flipped) {
+      setPeople(people => ({...people, [flipped]: {...people[flipped], already_selected: true}}))
+      setFlipped('')
+      return
+    }
+
+    setFlipped(name)
+  }
+
+
+  if(page == 'landing') return (
+    <div style={{width: '100%', height: '100%'}} onClick={() => setPage('selection')}>
+
     </div>
   )
+
+  else return (<section className='container'>
+    {Object.keys(people).map(name => (
+      <div className={`cards ${flipped == name && 'big flipped'}`} 
+        onClick={() => clickCard(name)} key={name}
+      > 
+        <div className={`card ${people[name].already_selected && 'selected'}`} key={name}>
+          <div className={`face front ${flipped == name && 'off'}`}> 
+            {people[name].already_selected ? <img src={people[name].hidden_img}/> : <img src={people[name].normal_img}/>}
+          </div> 
+          <div className={`face ${flipped !== name ? 'off' : 'back'}`}> 
+            <img src={people[name].normal_img}/>
+          </div> 
+        </div> 
+      </div> 
+    ))}
+  </section>)
 }
 
 export default App
