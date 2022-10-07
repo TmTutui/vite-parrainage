@@ -42,9 +42,12 @@ body {
 
   /* margin: 15px 30px; */
   
-  display: flex;
+  /* display: flex;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-between; */
 }
 
 .off {
@@ -54,6 +57,7 @@ body {
 }
 
 .cards {
+    position: absolute;
     -webkit-perspective: 900px;
     -moz-perspective: 900px;
     perspective: 900px;
@@ -127,23 +131,10 @@ body {
     cursor: pointer;
 }
 
-@keyframes fix-center {
-  0% {
-    position: relative;
-  }
-
-  85% {
-    position: absolute;
-  }
-
-  100% {
-    position: absolute;
-  }
-}
-
 .big {
     position: absolute;
     margin: 0px !important;
+    left: 0px !important;
 
     background-color: rgba(255, 255, 255, 1);
     height: 100%;
@@ -155,8 +146,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    animation: fix-center .5s;
 }
 
 .cards .selected {
@@ -181,6 +170,7 @@ body {
 
   right: 25%;
   width: 50%;
+  max-width: 300px;
 
   display: flex;
   align-items: center;

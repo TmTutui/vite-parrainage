@@ -36,6 +36,7 @@ function App() {
     setFlipped(name)
   }
 
+  const images_per_row = Math.round(window.screen.width/(180)) // window.innerWidth
 
   if(page == 'landing') return (
     <div className='landing' onClick={() => setPage('selection')}>
@@ -46,7 +47,8 @@ function App() {
   else return (<section className='container'>
     {Object.keys(people).map((name, index) => (
       <div className={`cards ${flipped == name && 'big flipped'}`} 
-        onClick={() => clickCard(name)} key={name} style={{left: `${index*180}px`}}
+        onClick={() => clickCard(name)} key={name} 
+        style={{left: `${(index%images_per_row)*180}px`, top: `${Math.floor(index/images_per_row)*300}px`}}
       > 
         <div className={`card ${people[name].already_selected && 'selected'}`} key={name}>
           <div className={`face front ${flipped == name && 'off'}`}> 
